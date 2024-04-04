@@ -7,12 +7,18 @@ const Form = () => {
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors, isSubmitting },
   } = useForm<FormValues>();
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    console.log(data);
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      throw new Error("error");
+      console.log(data);
+    } catch (error) {
+      setError("email", { message: "this email is already taken" });
+    }
   };
 
   return (
