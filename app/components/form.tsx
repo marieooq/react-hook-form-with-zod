@@ -7,11 +7,12 @@ const Form = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<FormValues>();
 
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
-    console.log({ data });
+  const onSubmit: SubmitHandler<FormValues> = async (data) => {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    console.log(data);
   };
 
   return (
@@ -58,8 +59,9 @@ const Form = () => {
       <button
         type="submit"
         className="text-white border-solid border-2 border-indigo-600 bg-indigo-600 p-2 rounded-md mt-2"
+        disabled={isSubmitting}
       >
-        Submit
+        {isSubmitting ? "Submitting..." : "Submit"}
       </button>
     </form>
   );
