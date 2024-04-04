@@ -9,7 +9,9 @@ const Form = () => {
     handleSubmit,
     setError,
     formState: { errors, isSubmitting },
-  } = useForm<FormValues>();
+  } = useForm<FormValues>({
+    defaultValues: { email: "test@gmail.com", password: "" },
+  });
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     try {
@@ -69,7 +71,8 @@ const Form = () => {
       >
         {isSubmitting ? "Submitting..." : "Submit"}
       </button>
-      {errors.root && (<span className="text-red-500">{errors.root.message}</span>
+      {errors.root && (
+        <span className="text-red-500">{errors.root.message}</span>
       )}
     </form>
   );
