@@ -17,7 +17,7 @@ const Form = () => {
       throw new Error("error");
       console.log(data);
     } catch (error) {
-      setError("email", { message: "this email is already taken" });
+      setError("root", { message: "something went wrong" });
     }
   };
 
@@ -69,6 +69,8 @@ const Form = () => {
       >
         {isSubmitting ? "Submitting..." : "Submit"}
       </button>
+      {errors.root && (<span className="text-red-500">{errors.root.message}</span>
+      )}
     </form>
   );
 };
